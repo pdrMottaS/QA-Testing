@@ -45,4 +45,11 @@ public class UsuarioServiceTest {
         assertEquals("Teste", uService.buscarPorId(1L).getName());
     }
 
+    @Test
+    public void buscarUsuarioPorIDNotOK(){
+        assertThrows(IllegalArgumentException.class, ()->{
+            uService.buscarPorId(2L);
+        });
+    }
+
 }
