@@ -26,6 +26,8 @@ public class UsuarioServiceTest {
     @MockBean
     private UsuarioRepository uRepository;
 
+    private List<Usuario> usuarios = new ArrayList<>();
+
     @BeforeEach
     public void setup(){
         Usuario usuario = new Usuario();
@@ -33,11 +35,15 @@ public class UsuarioServiceTest {
         usuario.setName("Teste");
         usuario.setPassword("123");
         Optional<Usuario> userOp = Optional.of(usuario);
-        List<Usuario> usuarios = new ArrayList<Usuario>();
-        usuarios.add(usuario);
+        this.usuarios.add(usuario);
         Mockito.when(uRepository.findAll()).thenReturn(usuarios);
         Mockito.when(uRepository.findById(1L)).thenReturn(userOp);
         Mockito.when(uRepository.save(any())).thenReturn(usuario);
+    }
+
+    @Test
+    public void listarUsuarios(){
+        assertEquals(this.usuarios, uService.todosUsuarios());
     }
 
     @Test

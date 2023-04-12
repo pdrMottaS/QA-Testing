@@ -1,14 +1,17 @@
 package com.app.qatesting.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Usuario")
+@Table(name="usuario")
 public class Usuario {
     
     @Id
@@ -21,6 +24,9 @@ public class Usuario {
 
     @Column(name = "usr_senha")
     private String password;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Anotacao> anotacaos;
 
     public Usuario(){}
 
@@ -51,6 +57,14 @@ public class Usuario {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Anotacao> getAnotacaos() {
+        return anotacaos;
+    }
+
+    public void setAnotacaos(List<Anotacao> anotacaos) {
+        this.anotacaos = anotacaos;
     }
 
 }
